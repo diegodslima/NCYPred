@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ super() }} - {{ title }}{% endblock %}
+
+			{% block content %}
+			<p class="lead text-justify">
+				<strong>E-mail:</strong>
+				The forecast results will be automatically sent to the email address provided.
+			</p>
+			<p class="lead text-justify">
+				<strong>Sequence:</strong>
+				{{ project }} accepts only RNA strings in FASTA format.
+			</p>
+			<p class="lead text-justify">
+				<strong>File:</strong>
+				The file must have the extension "<em> .fasta </em>" and its content must be in FASTA format.
+			</p>
+
+			<p class="lead text-justify">
+				<strong>Usage:</strong>
+			</p>
+			<ul>
+				<li class="lead">Sequences should be shorter than 500 nucleotides.</li>
+				<li class="lead">Sequences containing ambiguous nucleotides (e.g. ‘N’, ‘W’, ‘R’ etc., will be removed).</li>
+				<li class="lead">{{ project }} does not distinguish coding RNA from non-coding RNA, therefore, other tools should be used for this type of prediction.</li>
+			</ul>
+			{% endblock %}

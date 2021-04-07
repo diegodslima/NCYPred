@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}{{ super() }} - {{ title }}{% endblock %}
+
+			{% block content %}
+			<h3>Welcome to {{ project }}</h3>
+			<p class="lead text-justify">{{ project }} is a deep learning model trained to classify non-coding RNA transcripts into 13 distinct classes: 5.8S rRNA, 5S rRNA, CD-box, HACA-box, Intron-gpI, Intron-gpII, Leader, miRNA, Riboswitch, Ribozyme, tRNA, Y RNA (vertebrates), sbRNA and CeY RNA (nematodes), sbRNA (insects), Y RNA like (bacterial). The model receives as input a non-coding RNA sequence in FASTA format and outputs the predicted class. NCYPred was trained on a dataset consisting of 31,000 non-coding RNA sequences obtained from Rfam 14.0 (<a href="https://rfam.xfam.org/" target="_blank">https://rfam.xfam.org/</a>). It is capable of extracting features directly from nucleotides sequences, learn sequence representations and classify them in 1 of 13 classes. For details of the training and evaluation process, please check our article at: (link). The datasets and trained models are also available at our GitHub repository (<a href="https://github.com/diegodslima/NCYPred" target="_blank">https://github.com/diegodslima/NCYPred</a>).</p>
+			{% endblock %}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>{% block title %}RNA{% endblock %}</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<meta name="author" content="Luiz Joaquim Aderaldo Amichi"/>
+	<meta name="description" content="RNA Classifier"/>
+	<meta name="keywords" content="Flask, Python, RNA, UEM"/>
+	<meta name="language" content="en"/>
+	<meta name="resource-type" content="document"/>
+
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename= 'img/favicon.ico') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}"/>
+</head>
+
+<body>
+	<!-- NAVBAR -->
+	<div class="container mt-3">
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link {{ 'active' if page == 'submit' else '' }}" href="{{ url_for('submit') }}">Submit</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ 'active' if page == 'about' else '' }}" href="{{ url_for('about') }}">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ 'active' if page == 'help' else '' }}" href="{{ url_for('help') }}">Help</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ 'active' if page == 'algorithm' else '' }}" href="{{ url_for('algorithm') }}">Algorithm</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ 'active' if page == 'team' else '' }}" href="{{ url_for('team') }}">Team</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ 'active' if page == 'contact' else '' }}" href="{{ url_for('contact') }}">Contact</a>
+			</li>
+		</ul>
+	</div>
+	<!--/ NAVBAR -->
+
+	<div class="container">
+		<!-- HEADER -->
+		<header class="bg-light text-center px-3 pt-3 pb-2">
+			<h1 class="display-3">
+				<img alt="{{ project }}" class="img-fluid" src="{{ url_for('static', filename= 'img/favicon.png') }}" width="75"/>
+				{{ project }}
+			</h1>
+			<p class="lead">{{ title }}</p>
+		</header>
+		<!--/ HEADER -->
+
+		<div class="bg-light px-5 py-1">
+			<hr/>
+		</div>
+
+		<!-- CONTENT -->
+		<div class="bg-light px-5 pt-2 pb-3">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<!--/ CONTENT -->
+	</div>
+
+	<div class="my-3 text-center">
+		{% block footer %}
+		{% endblock %}
+	</div>
+
+	<footer>
+		<script src="{{ url_for('static', filename= 'js/jquery-3.6.0.min.js') }}"></script>
+		<script src="{{ url_for('static', filename= 'js/bootstrap.bundle.min.js') }}"></script>
+		{% block script %}
+		{% endblock %}
+	</footer>
+</body>
+
+</html>

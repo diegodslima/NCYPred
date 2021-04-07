@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block title %}{{ super() }} - {{ title }}{% endblock %}
+
+			{% block content %}
+			<p class="lead text-justify">{{ project }} allows the user to send RNA strings (single or multiple) in FASTA format. If you want to get forecast results by email, please provide your email address.</p>
+			<p class="lead text-justify">The sequences can be sent via a file or by inserting the RNA sequences in the text box. If both are sent, only the file will be considered and the informed text will be ignored.</p>
+
+			<!-- FORM -->
+			<form action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data" id="form">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" name="email" id="email" placeholder="Optional"/>
+				</div>
+				<div class="form-group">
+					<label for="sequence">Sequence</label>
+					<textarea class="form-control" name="sequence" id="sequence" rows="5"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="file">File</label>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" name="file" id="file"/>
+						<label class="custom-file-label" for="file">Choose file</label>
+					</div>
+				</div>
+				<input class="btn btn-primary" type="submit" value="Send" id="submit"/>
+				<input class="btn btn-outline-dark" type="reset" value="Clean" id="reset"/>
+			</form>
+			<!--/ FORM -->
+
+			<br/>
+			<div class="d-flex justify-content-center">
+				<div class="spinner-border text-primary" role="status" id="load" style="display: none;">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</div>
+			<div class="alert text-center {% if status is defined %} {{ 'alert-success' if status else 'alert-danger' }} {% endif %}" role="alert" id="message" style="{% if status is defined %} {{ '' }} {% else %} {{ 'display: none;' }} {% endif %}">
+				{% if message is defined %} {{ message }} {{ data|safe }} {% endif %}
+			</div>
+			{% endblock %}
+
+		{% block footer %}
+		<a class="mx-3 text-decoration-none" href="https://www.gov.br/capes/pt-br" title="CAPES">
+			<img alt="CAPES" class="img-fluid" src="{{ url_for('static', filename= 'img/capes.png') }}" width="75"/>
+		</a>
+		<a class="mx-3 text-decoration-none" href="https://www.gov.br/cnpq/pt-br" title="CNPq">
+			<img alt="CNPq" class="img-fluid" src="{{ url_for('static', filename= 'img/cnpq.png') }}" width="75"/>
+		</a>
+		<a class="mx-3 text-decoration-none" href="http://www.finep.gov.br/" title="FINEP">
+			<img alt="FINEP" class="img-fluid" src="{{ url_for('static', filename= 'img/finep.png') }}" width="75"/>
+		</a>
+		<a class="mx-3 text-decoration-none" href="http://www.fappr.pr.gov.br/" title="Fundação Araucária">
+			<img alt="Fundação Araucária" class="img-fluid" src="{{ url_for('static', filename= 'img/fundacao-araucaria.png') }}" width="75"/>
+		</a>
+		<a class="mx-3 text-decoration-none" href="http://www.uem.br/npd/" title="NPD/UEM">
+			<img alt="NPD/UEM" class="img-fluid" src="{{ url_for('static', filename= 'img/uem.png') }}" width="75"/>
+		</a>
+		{% endblock %}
+
+		{% block script %}
+		<!-- SCRIPT -->
+		<script>
+			$(function () {
+				// DESABILITA OS CAMPOS DE ENTRADA
+				function disable() {
+					email.prop("disabled", true);
+					sequence.prop("disabled", true);
+					file.prop("disabled", true);
+					submit.prop("disabled", true);
+					reset.prop("disabled", true);
+				}
+
+				// HABILITA OS CAMPOS DE ENTRADA
+				function enable() {
+					email.prop("disabled", false);
+					sequence.prop("disabled", false);
+					file.prop("disabled", false);
+					submit.prop("disabled", false);
+					reset.prop("disabled", false);
+				}
+
+				// LIMPAR TODOS OS CAMPOS DO FORMULÁRIO
+				function clean() {
+					email.val("");
+					sequence.val("");
+					file.val("");
+				}
+
+				// VARIÁVEL DO FORMULÁRIO E BOOLEANO DO FLASK QUE NÃO FUNCIONA MÉTODO POST
+				let form = $("form[id='form']");
+				let flask = false;
+
+				// VARIÁVEIS DOS CAMPOS DE ENTRADA
+				let email = $("input[id='email']");
+				let sequence = $("textarea[id='sequence']");
+				let file = $("input[id='file']");
+				let submit = $("input[id='submit']");
+				let reset = $("input[id='reset']");
+
+				// VARIÁVEIS DE SAÍDA
+				let message = $("div[id='message']");
+				let load = $("div[id='load'");
+
+				// NOME DO ARQUIVO NO CAMPO DE ENTRADA
+				$(".custom-file-input").on("change", function() {
+					console.log("oi galera");
+					var name = $(this).val().split("\\").pop();
+					$(this).siblings(".custom-file-label").addClass("selected").html(name);
+				});
+
+				// ENVIO DO FORMULÁRIO
+				form.submit(function(event) {
+					if(flask) // ATIVADO PARA REQUISIÇÕES ASSÍNCRONAS
+						event.preventDefault();
+
+					if((file.val() || sequence.val()) && flask) { // ENVIOU UM ARQUIVO OU UM TEXTO, E ESTÁ ATIVADO O AJAX
+						$.ajax({
+							type: "post",
+							url: "/process",
+							dataType: "json",
+							async: true,
+							contentType: "application/json; charset=utf-8",
+							data: {"email": email.val(), "sequence": sequence.val(), "file": file.get(0).files[0]},
+							beforeSend: function() {
+								disable();
+								message.hide();
+								load.fadeIn("fast");
+							},
+							complete: function() {
+								enable();
+								load.hide();
+								message.fadeIn("fast");
+							},
+							success: function(response) {
+								message.text(response.message);
+
+								if(response.status) {
+									clean();
+									message.addClass("alert-success").removeClass("alert-danger alert-warning");
+								}
+								else
+									message.addClass("alert-danger").removeClass("alert-success alert-warning");
+							},
+							error: function() {
+								message.text("The service is currently unavailable, please try again later.");
+								message.addClass("alert-danger").removeClass("alert-success alert-warning");
+							}
+						});
+					}
+					else if(!(file.val() || sequence.val())) { // NÃO ENVIOU NENHUM ARQUIVO OU TEXTO
+						message.text("It is necessary to send a file or enter a sequence.");
+						message.addClass("alert-warning").removeClass("alert-success alert-danger");
+						message.fadeIn("fast");
+						return false;
+					}
+					else { // ENVIOU OS VALORES NECESSÁRIOS, MAS A REQUISIÇÃO NÃO SERÁ ASSÍNCRONA
+						submit.prop("disabled", true);
+						reset.prop("disabled", true);
+						message.hide();
+						load.fadeIn("fast");
+					}
+				});
+			});
+		</script>
+		<!--/ SCRIPT -->
+		{% endblock %}
