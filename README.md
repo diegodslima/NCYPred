@@ -1,6 +1,5 @@
 # NCYPred: 
-## a bidirectional long short-term memory network with attention mechanism 
-## for small non-coding RNA and Y-RNA classification
+## a bidirectional long short-term memory network with attention mechanism for small non-coding RNA and Y-RNA classification.
 
 Python 3.7
 
