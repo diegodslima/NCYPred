@@ -1,4 +1,4 @@
-# yrnaclassifier
+# NCYPred
 
 Python 3.7
 
