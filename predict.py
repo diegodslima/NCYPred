@@ -140,7 +140,7 @@ def main():
 
 	# load model
 	print('Loading model...')
-	model = keras.models.load_model('./trained-model/', compile=False)
+	model = keras.models.load_model('./NCYPred_model/', compile=False)
 	print('Predicting...')
 	predictions = model.predict(x_pad, verbose=0)
 	pred_labels, label_list = argmax_to_label(predictions)
