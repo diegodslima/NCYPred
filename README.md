@@ -33,8 +33,17 @@ Sequences can be sent via a file or by inserting the RNA sequences in the text b
 
 ### Datasets
 The dataset used to train NCYPred is available in: /dataset/dataset-NCYPred/
+Full dataset: 
+Rfam-5000-undersample-full-dataset.csv
+Training set: training-set-rfam-corrected.csv
+Validation set: validation-set-rfam-corrected.csv
+Species count: species-count.xlsx
 
 The nRC-dataset used in this work is available in: /dataset/dataset-nRC/
+Training set: dataset_Rfam_6320_13classes.fasta
+Validation set: dataset_Rfam_validated_2600_13classes.fasta
+Dataset analysis: nRC-dataset.ipynb
+Source: http://tblab.pa.icar.cnr.it/public/nRC/paper_dataset/
 
 ### Models
 NCYPred:
