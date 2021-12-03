@@ -28,3 +28,18 @@ python predict.py -i input_file.fasta -o output_file
 
   NCYPred  web-server allows the user to send RNA strings (single or multiple) in FASTA format. If you want to get forecast results by email, please provide your email address.
 Sequences can be sent via a file or by inserting the RNA sequences in the text box. If both are sent, only the file will be considered and the informed text will be ignored.
+
+## Repository structure
+
+### Datasets
+The dataset used to train NCYPred is available in the /dataset/dataset-NCYPred/ folder.
+The nRC-dataset used in this work is available in the /dataset/dataset-nRC/ folder.
+
+### Models
+NCYPred:
+The NCYPred model is available in the /models/NCYPred_model/ folder. 
+This model was trained using the biLSTM + Attention architecture, using TensorFlow 2.3.
+The Attention layer used in this work was adapted based on the implementation created by Christos Baziotis (https://gist.github.com/cbaziotis/6428df359af27d58078ca5ed9792bd6d).
+
+biLSTM:
+The model trained using the biLSTM architecture, without the Attention layer, is available in the /models/biLSTM_model/ folder.
