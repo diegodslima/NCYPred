@@ -1,6 +1,9 @@
 # NCYPred
-  This repository accompanies the article: "NCYPred: A Bidirectional LSTM Network with Attention for Y RNA and short non-coding RNA classification", published in the journal IEEE/ACM Transactions on Computational Biology and Bioinformatics. If you use this work, please cite: "D. De Souza Lima, L. J. A. Amichi, A. A. Constantino, M. A. Fernandez and F. A. V. Seixas, "NCYPred: A Bidirectional LSTM Network with Attention for Y RNA and short non-coding RNA classification," in IEEE/ACM Transactions on Computational Biology and Bioinformatics, doi: 10.1109/TCBB.2021.3131136."
+  This repository accompanies the article: "NCYPred: A Bidirectional LSTM Network with Attention for Y RNA and short non-coding RNA classification", published in the journal IEEE/ACM Transactions on Computational Biology and Bioinformatics (https://ieeexplore.ieee.org/document/9627779). 
+  
+If you use this work, please cite: "D. De Souza Lima, L. J. A. Amichi, A. A. Constantino, M. A. Fernandez and F. A. V. Seixas, "NCYPred: A Bidirectional LSTM Network with Attention for Y RNA and short non-coding RNA classification," in IEEE/ACM Transactions on Computational Biology and Bioinformatics, doi: 10.1109/TCBB.2021.3131136."
 
+# Dependencies
 Python 3.7
 
 Dependencies:
