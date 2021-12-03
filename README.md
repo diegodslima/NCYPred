@@ -57,13 +57,13 @@ biLSTM:
 The model trained using the biLSTM architecture, without the Attention layer, is available in: /models/biLSTM_model/
 
 ### Notebooks
-Code used in this work is available as Jupyter Notebooks.
+Code used in this work is available as Jupyter Notebooks.  
 
-Training code: /notebooks/NCYPred_training.ipynb
-Validation code: /notebooks/NCYPred_validation.ipynb
-biLSTM + Attention validation on the nRC dataset: /notebooks/biLSTMAttention-nRC-validation.ipynb
+Training code: /notebooks/NCYPred_training.ipynb  
+Validation code: /notebooks/NCYPred_validation.ipynb  
+biLSTM + Attention validation on the nRC dataset: /notebooks/biLSTMAttention-nRC-validation.ipynb  
 
-additional methods described in the paper:
-Profile Hidden Markov Models (nhmmer): /notebooks/HMM-profile-model.ipynb
-Alignment based prediction (nhmmer): /notebooks/alignment-based-model.ipynb
+additional methods described in the paper:  
+Profile Hidden Markov Models (nhmmer): /notebooks/HMM-profile-model.ipynb  
+Alignment based prediction (nhmmer): /notebooks/alignment-based-model.ipynb  
 
