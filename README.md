@@ -32,18 +32,18 @@ Sequences can be sent via a file or by inserting the RNA sequences in the text b
 ## Repository structure
 
 ### Datasets
-The dataset used to train NCYPred is available in the /dataset/dataset-NCYPred/ folder.
+The dataset used to train NCYPred is available in: /dataset/dataset-NCYPred/
 
-The nRC-dataset used in this work is available in the /dataset/dataset-nRC/ folder.
+The nRC-dataset used in this work is available in: /dataset/dataset-nRC/
 
 ### Models
 NCYPred:
-The NCYPred model is available in the /models/NCYPred_model/ folder. 
+The NCYPred model is available in: /models/NCYPred_model/
 This model was trained using the biLSTM + Attention architecture, using TensorFlow 2.3.
 The Attention layer used in this work was adapted based on the implementation created by Christos Baziotis (https://gist.github.com/cbaziotis/6428df359af27d58078ca5ed9792bd6d).
 
 biLSTM:
-The model trained using the biLSTM architecture, without the Attention layer, is available in the /models/biLSTM_model/ folder.
+The model trained using the biLSTM architecture, without the Attention layer, is available in: /models/biLSTM_model/
 
 ### Notebooks
 Code used in this work is available as Jupyter Notebooks.
